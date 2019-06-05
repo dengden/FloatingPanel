@@ -302,8 +302,22 @@ class FloatingPanel: NSObject, UIGestureRecognizerDelegate, UIScrollViewDelegate
                 }
             }
         case panGestureRecognizer:
-            let translation = panGesture.translation(in: panGestureRecognizer.view!.superview)
-            let location = panGesture.location(in: panGesture.view)
+			var translation = panGesture.translation(in: panGestureRecognizer.view!.superview)
+			let location = panGesture.location(in: panGesture.view)
+			
+			if surfaceView.frame.minY < layoutAdapter.topY {
+				if self.state == .half {
+					let ratio = 0.7 - log10( (layoutAdapter.topY - translation.y) / layoutAdapter.topY )
+					translation.y *= ratio
+				}
+				else {
+					let beforeLimit = layoutAdapter.topY - panGestureRecognizer.panStartingY
+					let netTranslationY = translation.y - beforeLimit
+				 	let ratio = 1 - log10( (layoutAdapter.topY - netTranslationY) / layoutAdapter.topY )
+					print(ratio)
+					translation.y *= ratio
+				}
+			}
 
             log.debug("panel gesture(\(state):\(panGesture.state)) --",
                 "translation =  \(translation.y), location = \(location.y), velocity = \(velocity.y)")
@@ -924,12 +938,14 @@ class FloatingPanel: NSObject, UIGestureRecognizerDelegate, UIScrollViewDelegate
 
 class FloatingPanelPanGestureRecognizer: UIPanGestureRecognizer {
     fileprivate weak var floatingPanel: FloatingPanel?
+	var panStartingY: CGFloat = 0
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {
         super.touchesBegan(touches, with: event)
         if floatingPanel?.animator != nil {
             self.state = .began
         }
-    }
+		panStartingY = (floatingPanel?.surfaceView.frame.minY)!
+}
     override weak var delegate: UIGestureRecognizerDelegate? {
         get {
             return super.delegate
