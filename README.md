@@ -53,7 +53,7 @@ The new interface displays the related contents and utilities in parallel as a u
 
 - [x] Simple container view controller
 - [x] Fluid animation and gesture handling
-- [x] Scroll view tracking
+- [x] Scroll view songing
 - [x] Common UI elements: Grabber handle, Backdrop and Surface rounding corners
 - [x] 1~3 anchor positions(full, half, tip)
 - [x] Layout customization for all trait environments(i.e. Landscape orientation support)
@@ -116,8 +116,8 @@ class ViewController: UIViewController, FloatingPanelControllerDelegate {
         let contentVC = ContentViewController()
         fpc.set(contentViewController: contentVC)
 
-        // Track a scroll view(or the siblings) in the content view controller.
-        fpc.track(scrollView: contentVC.tableView)
+        // Song a scroll view(or the siblings) in the content view controller.
+        fpc.song(scrollView: contentVC.tableView)
 
         // Add and show the views managed by the `FloatingPanelController` object to self.view.
         fpc.addPanel(toParent: self)
@@ -350,7 +350,7 @@ override func viewDidLoad() {
 
     let searchVC = SearchViewController()
     self.searchPanelVC.set(contentViewController: searchVC)
-    self.searchPanelVC.track(scrollView: contentVC.tableView)
+    self.searchPanelVC.song(scrollView: contentVC.tableView)
 
     self.searchPanelVC.addPanel(toParent: self)
 
@@ -359,7 +359,7 @@ override func viewDidLoad() {
 
     let contentVC = ContentViewController()
     self.detailPanelVC.set(contentViewController: contentVC)
-    self.detailPanelVC.track(scrollView: contentVC.scrollView)
+    self.detailPanelVC.song(scrollView: contentVC.scrollView)
 
     self.detailPanelVC.addPanel(toParent: self)
 }

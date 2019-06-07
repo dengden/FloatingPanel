@@ -179,7 +179,7 @@ class FloatingPanel: NSObject, UIGestureRecognizerDelegate, UIScrollViewDelegate
              is UIRotationGestureRecognizer,
              is UIScreenEdgePanGestureRecognizer,
              is UIPinchGestureRecognizer:
-            // all gestures of the tracking scroll view should be recognized in parallel
+            // all gestures of the songing scroll view should be recognized in parallel
             // and handle them in self.handle(panGesture:)
             return scrollView?.gestureRecognizers?.contains(otherGestureRecognizer) ?? false
         default:
@@ -200,7 +200,7 @@ class FloatingPanel: NSObject, UIGestureRecognizerDelegate, UIScrollViewDelegate
 
         /* log.debug("shouldRequireFailureOf", otherGestureRecognizer) */
 
-        // Should begin the pan gesture without waiting for the tracking scroll view's gestures.
+        // Should begin the pan gesture without waiting for the songing scroll view's gestures.
         // `scrollView.gestureRecognizers` can contains the following gestures
         // * UIScrollViewDelayedTouchesBeganGestureRecognizer
         // * UIScrollViewPanGestureRecognizer (scrollView.panGestureRecognizer)
@@ -545,7 +545,7 @@ class FloatingPanel: NSObject, UIGestureRecognizerDelegate, UIScrollViewDelegate
 
         viewcontroller.delegate?.floatingPanelDidEndDragging(viewcontroller, withVelocity: velocity, targetPosition: targetPosition)
 
-        // Workaround: Disable a tracking scroll to prevent bouncing a scroll content in a panel animating
+        // Workaround: Disable a songing scroll to prevent bouncing a scroll content in a panel animating
         let isScrollEnabled = scrollView?.isScrollEnabled
         if let scrollView = scrollView, targetPosition != .full {
             scrollView.isScrollEnabled = false

@@ -97,7 +97,7 @@ open class FloatingPanelController: UIViewController, UIScrollViewDelegate, UIGe
         return floatingPanel.backdropView
     }
 
-    /// Returns the scroll view that the controller tracks.
+    /// Returns the scroll view that the controller songs.
     public weak var scrollView: UIScrollView? {
         return floatingPanel.scrollView
     }
@@ -122,14 +122,14 @@ open class FloatingPanelController: UIViewController, UIScrollViewDelegate, UIGe
         return floatingPanel.behavior
     }
 
-    /// The content insets of the tracking scroll view derived from this safe area
+    /// The content insets of the songing scroll view derived from this safe area
     public var adjustedContentInsets: UIEdgeInsets {
         return floatingPanel.layoutAdapter.adjustedContentInsets
     }
 
     /// The behavior for determining the adjusted content offsets.
     ///
-    /// This property specifies how the content area of the tracking scroll view is modified using `adjustedContentInsets`. The default value of this property is FloatingPanelController.ContentInsetAdjustmentBehavior.always.
+    /// This property specifies how the content area of the songing scroll view is modified using `adjustedContentInsets`. The default value of this property is FloatingPanelController.ContentInsetAdjustmentBehavior.always.
     public var contentInsetAdjustmentBehavior: ContentInsetAdjustmentBehavior = .always
 
     /// A Boolean value that determines whether the removal interaction is enabled.
@@ -301,7 +301,7 @@ open class FloatingPanelController: UIViewController, UIScrollViewDelegate, UIGe
         setUpLayout()
 
         if #available(iOS 11.0, *) {
-            // Must track the safeAreaInsets of `self.view` to update the layout.
+            // Must song the safeAreaInsets of `self.view` to update the layout.
             // There are 2 reasons.
             // 1. This or the parent VC doesn't call viewSafeAreaInsetsDidChange() on the bottom
             // inset's update expectedly.
@@ -468,13 +468,13 @@ open class FloatingPanelController: UIViewController, UIScrollViewDelegate, UIGe
         }
     }
 
-    // MARK: - Scroll view tracking
+    // MARK: - Scroll view songing
 
-    /// Tracks the specified scroll view to correspond with the scroll.
+    /// Songs the specified scroll view to correspond with the scroll.
     ///
     /// - Parameters:
     ///     - scrollView: Specify a scroll view to continuously and seamlessly work in concert with interactions of the surface view or nil to cancel it.
-    public func track(scrollView: UIScrollView?) {
+    public func song(scrollView: UIScrollView?) {
         guard let scrollView = scrollView else {
             floatingPanel.scrollView = nil
             return
